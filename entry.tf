@@ -10,8 +10,10 @@ resource "hcloud_server" "lobby" {
   server_type = "cx11"
 }
 
+
+
 data "template_file" "bungee_config" {
-  template = "${file("configs/bungee_config.yml")}"
+  template = "${file("configs/bungee_config.yml.tpl")}"
   vars = {
     flash01_address = "${hcloud_server.flash01.ipv4_address}"
     lobby_address = "${hcloud_server.lobby.ipv4_address}"
