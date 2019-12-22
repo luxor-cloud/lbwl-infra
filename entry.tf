@@ -2,32 +2,18 @@ resource "hcloud_server" "bungee" {
   name        = "bungee"
   image       = "debian-9"
   server_type = "cx11"
-  ssh_keys = ["${var.public_key}"]
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "root"
-      private_key = "${file(var.private_key)}"
-    }
-  }
-  provisioner "local-exec" {
-    // DO STUFF
-  }
 }
 
-resource "hcloud_server" "hub" {
-  name        = "hub"
+resource "hcloud_server" "lobby" {
+  name        = "lobby"
   image       = "debian-9"
   server_type = "cx11"
-  ssh_keys = ["${var.public_key}"]
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "root"
-      private_key = "${file(var.private_key)}"
-    }
-  }
-  provisioner "local-exec" {
-    // DO STUFF
+}
+
+data "template_file" "bungee_config" {
+  template = "${file("configs/bungee_config.yml")}"
+  vars = {
+    flash01_address = "${hcloud_server.flash01.ipv4_address}"
+    lobby_address = "${hcloud_server.lobby.ipv4_address}"
   }
 }
