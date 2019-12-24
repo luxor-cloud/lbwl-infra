@@ -23,7 +23,7 @@ servers:
     restricted: false
 listeners:
 - query_port: 25588
-  motd: '&1Another Bungee server'
+  motd: '&eLightweight bergwerkLABS'
   priorities:
   - lobby
   bind_local_address: true
