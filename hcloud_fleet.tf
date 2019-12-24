@@ -1,5 +1,5 @@
 data "hcloud_ssh_key" "ssh_key" {
-  fingerprint = "d5:40:79:0e:97:9e:8e:a4:53:c8:95:0d:93:77:14:5d"
+  fingerprint = "${var.public_key}"
 }
 
 resource "hcloud_server" "hub" {

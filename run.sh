@@ -10,5 +10,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-ansible-playbook hub_playbook.yml && ansible_playbook flash_playbook.yml
+export TF_STATE=.
+
+ansible-playbook hub_playbook.yml && ansible-playbook flash_playbook.yml
 
