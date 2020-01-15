@@ -1,0 +1,12 @@
+nodes:
+  {% for host in vars['ansible_play_hosts_all'] %}
+  - address: {{ hostvars[host]['ansible_default_ipv4.address']['address'] }}
+    user: root
+    role: [{{ ansible_hostname }}]
+  {% endfor %}
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
