@@ -15,7 +15,6 @@ Created servers are the following:
 **Install requirements**
 ```
 $ ./install.sh
-
 ```
 
 **Run**
