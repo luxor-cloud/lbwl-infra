@@ -12,9 +12,15 @@ Created servers are the following:
 | etcd         | `etcd`         | `CX11`          |
 
 
-**Install requirements**
+Usage
+-----
+
+After cloning the repository install the requirements and initialze Terraform. Note that Terraform and Ansible have to be installed on your system.
+
+**Install requirements and initialize**
 ```
 $ ./install.sh
+$ terraform init
 ```
 
 **Run**
@@ -23,4 +29,7 @@ $ ./install.sh
 $ ./run.sh
 ```
 
-Note that Terraform and Ansible have to be installed on your system.
+**Remove the whole cluster**
+```
+$ ./rm.sh
+```
