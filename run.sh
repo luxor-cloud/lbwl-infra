@@ -13,3 +13,5 @@ fi
 export TF_STATE=.
 
 ansible-playbook playbook.yml
+
+rke up
