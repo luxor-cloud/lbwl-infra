@@ -1,0 +1,10 @@
+- hosts: all
+  remote_user: root
+  become: yes
+  vars_files:
+    - vars/docker.yml
+  roles:
+    - geerlingguy.docker
+  tasks:
+    - name: Create the rancher-cluster.yml file
+      local_action: template src=config/rancher-cluster.yml.template dest=rancher-cluster.yml
