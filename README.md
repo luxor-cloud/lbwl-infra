@@ -1,7 +1,7 @@
 lbwl-infra
 ==========
 
-Bootstraps infrastructure on Hetzner-Cloud to run the small Minecraft server network. Kubernetes will be installed using Rancher Kubernetes Engine (RKE). Servers will be created using Terraform and provisioned with Ansible. There is a RKE plugin for Terraform, but we won't use it, because using Ansible seems like the more stable variant.
+Bootstraps infrastructure on Hetzner-Cloud to run the small Minecraft server network. Kubernetes will be installed using Rancher Kubernetes Engine (RKE). Servers will be created using Terraform and provisioned with Ansible.
  
 Created servers are the following:
 
