@@ -8,7 +8,7 @@ resource "hcloud_server" "controlplane" {
   server_type = "cx11"
   ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${hcloud_server.kube1.ipv4_address}, playbook.yml"
+    command = "ansible-playbook -i ${hcloud_server.controlplane.ipv4_address}, playbook.yml"
   }
 }
 
@@ -18,7 +18,7 @@ resource "hcloud_server" "worker1" {
   server_type = "cx11"
   ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${hcloud_server.kube1.ipv4_address}, playbook.yml "
+    command = "ansible-playbook -i ${hcloud_server.worker1.ipv4_address}, playbook.yml "
   }
 }
 
@@ -28,25 +28,25 @@ resource "hcloud_server" "worker2" {
   server_type = "cx11"
   ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${hcloud_server.kube1.ipv4_address}, playbook.yml"
+    command = "ansible-playbook -i ${hcloud_server.worker2.ipv4_address}, playbook.yml"
   }
 }
 
 resource rke_cluster "cluster" {
   nodes {
-    address = "${resource.hcloud_server.controlplane.ipv4_address}"
+    address = "${hcloud_server.controlplane.ipv4_address}"
     user    = "root"
     role    = ["controlplane", "etcd"]
     ssh_key = file("${var.private_key}")
   }
   nodes {
-    address = "${resource.hcloud_server.worker1.ipv4_address}"
+    address = "${hcloud_server.worker1.ipv4_address}"
     user    = "root"
     role    = ["worker"]
     ssh_key = file("${var.private_key}")
   }
   nodes {
-    address = "${resource.hcloud_server.worker2.ipv4_address}"
+    address = "${hcloud_server.worker2.ipv4_address}"
     user    = "root"
     role    = ["worker"]
     ssh_key = file("${var.private_key}")
