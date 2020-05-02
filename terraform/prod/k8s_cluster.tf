@@ -1,12 +1,13 @@
-//data "hcloud_ssh_key" "ssh_key" {
-  //fingerprint = "${var.public_key}"
-//}
+data "hcloud_ssh_key" "ssh_key" {
+  fingerprint = "${var.public_key}"
+}
 
-resource "hcloud_server" "mars-k8s-etcd01" {
-  name        = "mars-k8s-etcd01"
+resource "hcloud_server" "mars-etcd01" {
+  name        = "mars-etcd01"
   image       = "debian-9"
   server_type = "cx11"
-  //ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   labels = {
     env = "prod"
     host = "k8s"
@@ -14,11 +15,12 @@ resource "hcloud_server" "mars-k8s-etcd01" {
   }
 }
 
-resource "hcloud_server" "mars-k8s-master01" {
-  name        = "mars-k8s-master01"
+resource "hcloud_server" "mars-master01" {
+  name        = "mars-master01"
   image       = "debian-9"
   server_type = "cx11"
-  //ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   labels = {
     env = "prod"
     host = "k8s"
@@ -26,11 +28,12 @@ resource "hcloud_server" "mars-k8s-master01" {
   }
 }
 
-resource "hcloud_server" "mars-k8s-worker01" {
-  name        = "prod-k8s-worker01"
+resource "hcloud_server" "mars-worker01" {
+  name        = "mars-worker01"
   image       = "debian-9"
   server_type = "cx11"
-  //ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   labels = {
     env = "prod"
     host = "k8s"
@@ -39,11 +42,12 @@ resource "hcloud_server" "mars-k8s-worker01" {
   }
 }
 
-resource "hcloud_server" "mars-k8s-worker02" {
-  name        = "mars-k8s-worker02"
+resource "hcloud_server" "mars-worker02" {
+  name        = "mars-worker02"
   image       = "debian-9"
   server_type = "cx11"
-  //ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
   labels = {
     env = "prod"
     host = "k8s"
