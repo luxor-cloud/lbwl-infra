@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-ansible-playbook -i inventory/mycluster/hosts.yml cluster.yml -b -v
+ansible-playbook -i inventories/prod/hosts.yml roles/kubespray/cluster.yml -b -v
