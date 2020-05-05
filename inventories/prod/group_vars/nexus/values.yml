@@ -52,7 +52,7 @@ nexus_privileges:
 - name: lbwl-mvn-releases-deploy
   description: 'Deploy privileges for LBWL release repo'
   type: repository-view
-  repository: LBWL-mvn-releases
+  repository: lbwl-mvn-releases
   format: maven2
   actions:
   - read
