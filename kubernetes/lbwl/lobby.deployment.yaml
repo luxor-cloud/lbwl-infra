@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lobby-deployment
+  namespace: lbwl
+  labels:
+    type: lobby
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: lobby
+  template:
+    metadata:
+      labels:
+        type: lobby
+    spec:
+      containers:
+      - name: lobby
+        image: docker.luxor.cloud/lbwl/lobby:1.0.0
+        ports:
+        - containerPort: 25565

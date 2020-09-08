@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flash-deployment
+  namespace: lbwl
+  labels:
+    type: minigame 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      minigame: flash
+  template:
+    metadata:
+      labels:
+        type: minigame
+        minigame: flash
+    spec:
+      containers:
+      - name: flash
+        image: docker.luxor.cloud/lbwl/flash:1.0.1
+        ports:
+        - containerPort: 25565

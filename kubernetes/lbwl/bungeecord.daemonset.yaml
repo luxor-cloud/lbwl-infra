@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: bungee-daemonset
+  namespace: lbwl
+spec:
+  selector:
+    matchLabels:
+      type: bungeecord
+  template:
+    metadata:
+      labels:
+        type: bungeecord
+    spec:
+      containers:
+      - name: bungeecord
+        image: docker.luxor.cloud/lbwl/bungee:1.0.0
+        ports:
+        - containerPort: 25565
