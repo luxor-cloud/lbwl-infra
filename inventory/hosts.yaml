@@ -2,8 +2,21 @@ all:
   vars:
     ansible_user: root
   hosts:
-    children:
-      todo: 
+    master01.prod.lbwl.luxor.cloud:
+      ansible_host: x.x.x.x
+    worker01.prod.lbwl.luxor.cloud:
+      ansible_host: x.x.x.x
+    worker02.prod.lbwl.luxor.cloud:
+      ansible_host: x.x.x.x
+  children:
+    kube_master:
+      hosts:
+        master01.prod.lbwl.luxor.cloud:
+    kube_worker:
+      hosts:
+        worker02.prod.lbwl.luxor.cloud:
+        worker01.prod.lbwl.luxor.cloud:
+
        
        
        
