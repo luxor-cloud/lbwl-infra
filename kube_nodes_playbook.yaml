@@ -1,0 +1,5 @@
+---
+- hosts: kube_worker kube_master
+  roles:
+    - role: geerlingguy.docker
+    - role: freggy.kubernetes
