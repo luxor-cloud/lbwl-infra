@@ -1,1 +1,1 @@
-kube_control_plane_endpoint: 127.0.0.1:6443
+# kube_control_plane_endpoint: 127.0.0.1:6443
