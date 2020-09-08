@@ -1,0 +1,68 @@
+data "hcloud_ssh_key" "ssh_key" {
+  fingerprint = "${var.public_key}"
+}
+
+resource "hcloud_server" "lbwl-prod-proxy01" {
+  name        = "lbwl-prod-proxy01"
+  image       = "debian-10"
+  server_type = "cx11"
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  labels = {
+    env = "prod"
+    host = "k8s"
+    type = "proxy"
+  }
+}
+
+resource "hcloud_server" "lbwl-prod-master01" {
+  name        = "lbwl-prod-master01"
+  image       = "debian-10"
+  server_type = "cx11"
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  labels = {
+    env = "prod"
+    host = "k8s"
+    type = "master"
+  }
+}
+
+resource "hcloud_server" "lbwl-prod-master02" {
+  name        = "lbwl-prod-master02"
+  image       = "debian-10"
+  server_type = "cx11"
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  labels = {
+    env = "prod"
+    host = "k8s"
+    type = "master"
+  }
+}
+
+resource "hcloud_server" "lbwl-prod-worker01" {
+  name        = "lbwl-prod-worker01"
+  image       = "debian-10"
+  server_type = "cx11"
+  datacenter = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  labels = {
+    env = "prod"
+    host = "k8s"
+    type = "worker"
+  }
+}
+
+resource "hcloud_server" "lbwl-prod-worker02" {
+  name        = "lbwl-prod-worker02"
+  image       = "debian-10"
+  server_type = "cx11"
+  datacenter  = "nbg1-dc3"
+  ssh_keys    = ["${data.hcloud_ssh_key.ssh_key.id}"]
+  labels = {
+    env = "prod"
+    host = "k8s"
+    type = "worker"
+  }
+}
