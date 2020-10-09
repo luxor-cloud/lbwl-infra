@@ -1,0 +1,27 @@
+---
+                - name: check installed flux version
+  shell: fluxctl version
+  register: flux_verion_command
+
+- name: set flux_version fact
+  set_fact:
+    flux_version: '{{ flux_version_command.stdout }}'
+
+- block:
+  - name: download fluxctl
+    get_url:
+      url: 'https://github.com/fluxcd/flux/releases/download/{{ pre_flux_version }}/fluxctl_linux_amd64'
+      dest: /usr/bin/fluxctl
+  - name: install flux
+    shell: |
+      fluxctl install \
+        --git-user={{ pre_flux_git_user }} \
+        --git-email={{ pre_flux_git_email }} \
+        --git-url={{ pre_flux_git_url }} \
+        --git-path={{ pre_flux_path }} | kubectl apply -f -
+  when: {{ flux_version }} is not {{ pre_flux_version }}
+
+- name: create git private key secret
+  shell: kubectl create secret generic flux-git-deploy --from-literal=identity={{ pre_flux_git_private_key }}
+
+
